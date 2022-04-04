@@ -1,0 +1,46 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Sat Dec 21 00:22:55 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000044
+                   .cinit    romdata   0x000022    program   0x000004
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000023      
+            36 out of 1094 program addresses used, program memory utilization is 3%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+              ADD_BALANCE   0x00001e    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC1_USER\MC1_USER.asm
+                    CHECK   0x000009    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC1_USER\MC1_USER.asm
+                     MAIN   0x000001    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC1_USER\MC1_USER.asm
+                    MODE1   0x000016    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC1_USER\MC1_USER.asm
+                    MODE2   0x000018    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC1_USER\MC1_USER.asm
+                    MODE3   0x00001a    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC1_USER\MC1_USER.asm
+                    MODE4   0x00001c    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC1_USER\MC1_USER.asm
+             SHOW_BALANCE   0x000020    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC1_USER\MC1_USER.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     MAIN   0x000001    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC1_USER\MC1_USER.asm
+                    CHECK   0x000009    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC1_USER\MC1_USER.asm
+                    MODE1   0x000016    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC1_USER\MC1_USER.asm
+                    MODE2   0x000018    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC1_USER\MC1_USER.asm
+                    MODE3   0x00001a    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC1_USER\MC1_USER.asm
+                    MODE4   0x00001c    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC1_USER\MC1_USER.asm
+              ADD_BALANCE   0x00001e    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC1_USER\MC1_USER.asm
+             SHOW_BALANCE   0x000020    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC1_USER\MC1_USER.asm
+
+

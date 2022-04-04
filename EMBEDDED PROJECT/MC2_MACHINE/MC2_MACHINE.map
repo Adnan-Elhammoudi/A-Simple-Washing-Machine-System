@@ -1,0 +1,100 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Tue Dec 24 15:13:17 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x0001f6
+                   .cinit    romdata   0x0000fb    program   0x000004
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x0000fc      
+            253 out of 1094 program addresses used, program memory utilization is 23%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+              ADD_BALANCE   0x0000a6    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    AGAIN   0x0000f3    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                  BAL_CHK   0x0000cb    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                 BLINKING   0x0000d1    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    CHECK   0x00000d    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+         DELAY_0.5_Sconed   0x0000e3    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+           DELAY_BLINKING   0x0000f1    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                   LABEL1   0x0000bc    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                     MAIN   0x000001    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    MOOD1   0x00001a    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             MOOD1_STAGE1   0x000021    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    MOOD2   0x000031    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             MOOD2_STAGE1   0x000038    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             MOOD2_STAGE2   0x000042    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             MOOD2_STAGE3   0x00004c    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    MOOD3   0x000058    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             MOOD3_STAGE1   0x00005f    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             MOOD3_STAGE2   0x000069    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             MOOD3_STAGE3   0x000073    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    MOOD4   0x00007f    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             MOOD4_STAGE1   0x000086    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             MOOD4_STAGE2   0x000090    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             MOOD4_STAGE3   0x00009a    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             SHOW_BALANCE   0x0000ab    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                     loop   0x0000e7    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    one_1   0x000023    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    one_2   0x00003a    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    one_3   0x000061    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    one_4   0x000088    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                  three_2   0x00004e    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                  three_3   0x000075    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                  three_4   0x00009c    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    two_2   0x000044    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    two_3   0x00006b    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    two_4   0x000092    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     MAIN   0x000001    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    CHECK   0x00000d    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    MOOD1   0x00001a    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             MOOD1_STAGE1   0x000021    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    one_1   0x000023    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    MOOD2   0x000031    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             MOOD2_STAGE1   0x000038    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    one_2   0x00003a    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             MOOD2_STAGE2   0x000042    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    two_2   0x000044    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             MOOD2_STAGE3   0x00004c    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                  three_2   0x00004e    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    MOOD3   0x000058    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             MOOD3_STAGE1   0x00005f    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    one_3   0x000061    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             MOOD3_STAGE2   0x000069    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    two_3   0x00006b    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             MOOD3_STAGE3   0x000073    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                  three_3   0x000075    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    MOOD4   0x00007f    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             MOOD4_STAGE1   0x000086    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    one_4   0x000088    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             MOOD4_STAGE2   0x000090    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    two_4   0x000092    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             MOOD4_STAGE3   0x00009a    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                  three_4   0x00009c    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+              ADD_BALANCE   0x0000a6    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+             SHOW_BALANCE   0x0000ab    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                   LABEL1   0x0000bc    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                  BAL_CHK   0x0000cb    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                 BLINKING   0x0000d1    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+         DELAY_0.5_Sconed   0x0000e3    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                     loop   0x0000e7    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+           DELAY_BLINKING   0x0000f1    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+                    AGAIN   0x0000f3    program     static C:\Users\HP\Desktop\EMBEDDED PROJECT\MC2_MACHINE\Untitled.asm
+
+

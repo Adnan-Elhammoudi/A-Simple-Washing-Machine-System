@@ -1,0 +1,268 @@
+MPASM  5.51                      MC1_USER.ASM   12-21-2019  0:22:53         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 #INCLUDE "P16F84A.INC"
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F84A processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00208         LIST
+                      00002 
+                      00003 
+Warning[205]: Found directive in column 1. (ORG)
+                      00004 ORG 0X00
+Warning[203]: Found opcode in column 1. (GOTO)
+0000   2???           00005 GOTO MAIN 
+0001                  00006 MAIN
+                      00007 
+Warning[203]: Found opcode in column 1. (BSF)
+0001   1683           00008 BSF STATUS,RP0
+                      00009 
+Warning[203]: Found opcode in column 1. (MOVLW)
+0002   30FF           00010 MOVLW 0XFF
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0003   0085           00011 MOVWF TRISA
+Warning[203]: Found opcode in column 1. (MOVLW)
+0004   3001           00012 MOVLW 0X01
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0005   0086           00013 MOVWF TRISB
+Warning[203]: Found opcode in column 1. (BCF)
+0006   1283           00014 BCF STATUS,RP0
+Warning[203]: Found opcode in column 1. (CLRF)
+0007   0186           00015 CLRF PORTB
+Warning[203]: Found opcode in column 1. (CLRF)
+0008   0185           00016 CLRF PORTA
+                      00017 
+                      00018 
+0009                  00019 CHECK
+                      00020 
+Warning[203]: Found opcode in column 1. (BTFSC)
+0009   1805           00021 BTFSC PORTA,0
+Warning[203]: Found opcode in column 1. (GOTO)
+000A   2???           00022 GOTO  MODE1
+Warning[203]: Found opcode in column 1. (BTFSC)
+000B   1885           00023 BTFSC PORTA,1
+Warning[203]: Found opcode in column 1. (GOTO)
+000C   2???           00024 GOTO  MODE2
+Warning[203]: Found opcode in column 1. (BTFSC)
+000D   1905           00025 BTFSC PORTA,2
+Warning[203]: Found opcode in column 1. (GOTO)
+000E   2???           00026 GOTO  MODE3
+MPASM  5.51                      MC1_USER.ASM   12-21-2019  0:22:53         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[203]: Found opcode in column 1. (BTFSC)
+000F   1985           00027 BTFSC PORTA,3
+Warning[203]: Found opcode in column 1. (GOTO)
+0010   2???           00028 GOTO  MODE4
+Warning[203]: Found opcode in column 1. (BTFSC)
+0011   1A05           00029 BTFSC PORTA,4
+Warning[203]: Found opcode in column 1. (GOTO)
+0012   2???           00030 GOTO  ADD_BALANCE
+Warning[203]: Found opcode in column 1. (BTFSC)
+0013   1806           00031 BTFSC PORTB,0
+Warning[203]: Found opcode in column 1. (GOTO)
+0014   2???           00032 GOTO  SHOW_BALANCE
+Warning[203]: Found opcode in column 1. (GOTO)
+0015   2???           00033 GOTO CHECK
+                      00034 
+                      00035 
+                      00036 
+0016                  00037 MODE1
+                      00038 
+Warning[203]: Found opcode in column 1. (BSF)
+0016   1506           00039 BSF PORTB,2
+                      00040 ;BCF PORTB,2
+Warning[203]: Found opcode in column 1. (GOTO)
+0017   2???           00041 GOTO MAIN
+                      00042 
+0018                  00043 MODE2
+                      00044 
+Warning[203]: Found opcode in column 1. (BSF)
+0018   1586           00045 BSF PORTB,3
+                      00046 ;BCF PORTB,3
+Warning[203]: Found opcode in column 1. (GOTO)
+0019   2???           00047 GOTO MAIN
+                      00048 
+001A                  00049 MODE3
+                      00050 
+Warning[203]: Found opcode in column 1. (BSF)
+001A   1606           00051 BSF PORTB,4
+                      00052 ;BCF PORTB,4
+Warning[203]: Found opcode in column 1. (GOTO)
+001B   2???           00053 GOTO MAIN
+                      00054 
+001C                  00055 MODE4
+                      00056 
+Warning[203]: Found opcode in column 1. (BSF)
+001C   1686           00057 BSF PORTB,5
+                      00058 ;BCF PORTB,5
+Warning[203]: Found opcode in column 1. (GOTO)
+001D   2???           00059 GOTO MAIN
+                      00060 
+                      00061 
+001E                  00062 ADD_BALANCE
+Warning[203]: Found opcode in column 1. (BSF)
+001E   1706           00063 BSF PORTB,6
+MPASM  5.51                      MC1_USER.ASM   12-21-2019  0:22:53         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00064 ;BCF PORTB,6
+Warning[203]: Found opcode in column 1. (GOTO)
+001F   2???           00065 GOTO MAIN
+                      00066 
+0020                  00067 SHOW_BALANCE
+Warning[203]: Found opcode in column 1. (BSF)
+0020   1786           00068 BSF PORTB,7
+                      00069 ;BCF PORTB,7
+Warning[203]: Found opcode in column 1. (GOTO)
+0021   2???           00070 GOTO MAIN
+                      00071 
+Warning[205]: Found directive in column 1. (END)
+                      00072 END
+MPASM  5.51                      MC1_USER.ASM   12-21-2019  0:22:53         PAGE  4
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ADD_BALANCE                       0000001E
+C                                 00000000
+CHECK                             00000009
+DC                                00000001
+EEADR                             00000009
+EECON1                            00000088
+EECON2                            00000089
+EEDATA                            00000008
+EEIE                              00000006
+EEIF                              00000004
+F                                 00000001
+FSR                               00000004
+GIE                               00000007
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+MAIN                              00000001
+MODE1                             00000016
+MODE2                             00000018
+MODE3                             0000001A
+MODE4                             0000001C
+NOT_PD                            00000003
+NOT_RBPU                          00000007
+NOT_TO                            00000004
+OPTION_REG                        00000081
+PCL                               00000002
+PCLATH                            0000000A
+PORTA                             00000005
+PORTB                             00000006
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RD                                00000000
+RP0                               00000005
+MPASM  5.51                      MC1_USER.ASM   12-21-2019  0:22:53         PAGE  5
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RP1                               00000006
+SHOW_BALANCE                      00000020
+STATUS                            00000003
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+W                                 00000000
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_CONFIG                           00002007
+_CP_OFF                           00003FFF
+_CP_ON                            0000000F
+_DEVID1                           00002006
+_FOSC_EXTRC                       00003FFF
+_FOSC_HS                          00003FFE
+_FOSC_LP                          00003FFC
+_FOSC_XT                          00003FFD
+_HS_OSC                           00003FFE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_LP_OSC                           00003FFC
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDTE_OFF                         00003FFB
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FFD
+__16F84A                          00000001
+MPASM  5.51                      MC1_USER.ASM   12-21-2019  0:22:53         PAGE  6
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+__DEBUG                           1
+
+Errors   :     0
+Warnings :    36 reported,     0 suppressed
+Messages :     2 reported,     0 suppressed
+
+

@@ -1,0 +1,742 @@
+MPASM  5.51                      UNTITLED.ASM   12-24-2019  15:13:11         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 #INCLUDE "P16F84A.INC"
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F84A processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00208         LIST
+  00000022            00002 COUNTER  EQU 0X22
+  00000023            00003 COUNTER1 EQU 0X23
+  00000024            00004 COUNTER2 EQU 0X24
+  00000025            00005 BALANCE  EQU 0X25
+  00000026            00006 OP_PRC   EQU 0X26 ; PRICE OF EVERY MODE
+  00000027            00007 BUSY     EQU 0X27 ;MUST BECOME 0 TO BE FREE , 1 IS BUSY
+Warning[205]: Found directive in column 1. (ORG)
+                      00008 ORG 0X00
+Warning[203]: Found opcode in column 1. (GOTO)
+0000   2???           00009 GOTO MAIN 
+                      00010 
+                      00011 
+0001                  00012 MAIN
+                      00013 ;INITIAL BALANCE 5 POINTS
+Warning[203]: Found opcode in column 1. (MOVLW)
+0001   3005           00014 MOVLW 0X05
+Warning[203]: Found opcode in column 1. (MOVWF)
+0002   00A5           00015 MOVWF BALANCE
+                      00016 
+                      00017 ;INITIALY FREE
+Warning[203]: Found opcode in column 1. (MOVLW)
+0003   3000           00018 MOVLW 0X00
+Warning[203]: Found opcode in column 1. (MOVWF)
+0004   00A7           00019 MOVWF BUSY
+                      00020 
+                      00021 ;PORTS CONFIGURATION
+Warning[203]: Found opcode in column 1. (BSF)
+0005   1683           00022 BSF STATUS,RP0
+Warning[203]: Found opcode in column 1. (MOVLW)
+0006   3000           00023 MOVLW 0X00
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0007   0085           00024 MOVWF TRISA
+Warning[203]: Found opcode in column 1. (MOVLW)
+0008   303F           00025 MOVLW B'00111111'
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0009   0086           00026 MOVWF TRISB
+Warning[203]: Found opcode in column 1. (BCF)
+000A   1283           00027 BCF STATUS,RP0
+Warning[203]: Found opcode in column 1. (CLRF)
+000B   0186           00028 CLRF PORTB
+Warning[203]: Found opcode in column 1. (CLRF)
+MPASM  5.51                      UNTITLED.ASM   12-24-2019  15:13:11         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000C   0185           00029 CLRF PORTA
+                      00030 
+                      00031 
+                      00032 
+000D                  00033 CHECK
+Warning[203]: Found opcode in column 1. (BTFSC)
+000D   1806           00034 BTFSC PORTB,0
+Warning[203]: Found opcode in column 1. (GOTO)
+000E   2???           00035 GOTO MOOD1
+                      00036 
+Warning[203]: Found opcode in column 1. (BTFSC)
+000F   1886           00037 BTFSC PORTB,1
+Warning[203]: Found opcode in column 1. (GOTO)
+0010   2???           00038 GOTO MOOD2
+                      00039 
+Warning[203]: Found opcode in column 1. (BTFSC)
+0011   1906           00040 BTFSC PORTB,2
+Warning[203]: Found opcode in column 1. (GOTO)
+0012   2???           00041 GOTO MOOD3
+                      00042 
+Warning[203]: Found opcode in column 1. (BTFSC)
+0013   1986           00043 BTFSC PORTB,3
+Warning[203]: Found opcode in column 1. (GOTO)
+0014   2???           00044 GOTO MOOD4
+                      00045 
+Warning[203]: Found opcode in column 1. (BTFSC)
+0015   1A06           00046 BTFSC PORTB,4
+Warning[203]: Found opcode in column 1. (GOTO)
+0016   2???           00047 GOTO ADD_BALANCE
+                      00048 
+Warning[203]: Found opcode in column 1. (BTFSC)
+0017   1A86           00049 BTFSC PORTB,5
+                      00050 
+Warning[203]: Found opcode in column 1. (GOTO)
+0018   2???           00051 GOTO SHOW_BALANCE
+                      00052 
+Warning[203]: Found opcode in column 1. (GOTO)
+0019   2???           00053 GOTO CHECK
+                      00054 
+                      00055 
+001A                  00056 MOOD1 ;EVERY STAGE HAS 4 SECs DELAY , WITH TOTAL DEL = 3*4 =12 SECs
+                      00057 
+Warning[203]: Found opcode in column 1. (BTFSC)
+001A   1827           00058 BTFSC BUSY ,0
+Warning[203]: Found opcode in column 1. (GOTO)
+001B   2???           00059 GOTO BLINKING
+Warning[203]: Found opcode in column 1. (MOVLW)
+001C   3005           00060 MOVLW D'5'
+Warning[203]: Found opcode in column 1. (MOVWF)
+001D   00A6           00061 MOVWF OP_PRC ; MODE1 OPERATION PRICE IS 5 POINTS
+Warning[203]: Found opcode in column 1. (CALL)
+001E   2???           00062 CALL BAL_CHK
+Warning[203]: Found opcode in column 1. (MOVLW)
+MPASM  5.51                      UNTITLED.ASM   12-24-2019  15:13:11         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+001F   3001           00063 MOVLW 0X01
+Warning[203]: Found opcode in column 1. (MOVWF)
+0020   00A7           00064 MOVWF BUSY
+                      00065 
+0021                  00066 MOOD1_STAGE1 
+0021   3004           00067           movlw 4
+0022   00A2           00068           movwf COUNTER
+0023   03A2           00069 one_1    decf COUNTER,1
+0024   1405           00070           bsf PORTA ,0
+0025   1485           00071           bsf PORTA ,1
+0026   1505           00072           bsf PORTA ,2
+0027   2???           00073           call DELAY_0.5_Sconed
+0028   1005           00074           bcf PORTA ,0
+0029   1085           00075           bcf PORTA ,1
+002A   1105           00076           bcf PORTA ,2
+002B   2???           00077           call DELAY_0.5_Sconed  ; APPROXIMATE 0.5 SECs
+002C   08A2           00078           movf COUNTER ,1
+002D   1D03           00079           btfss STATUS ,Z
+002E   2???           00080          goto one_1
+                      00081 ;MOOD1_STAGE2
+                      00082           ;movlw 4
+                      00083          ; movwf COUNTER
+                      00084 ;two_1    decf COUNTER,1
+                      00085           ;bsf PORTA ,1
+                      00086           ;call DELAY_0.5_Sconed
+                      00087           ;bcf PORTA ,1
+                      00088           ;call DELAY_0.5_Sconed  
+                      00089          ; movf COUNTER,1
+                      00090           ;btfss STATUS ,Z
+                      00091           ;goto one_1 
+                      00092 ;MOOD1_STAGE3
+                      00093           ;movlw 4
+                      00094          ; movwf COUNTER
+                      00095 ;three_1    decf COUNTER,1
+                      00096           ;bsf PORTA ,2
+                      00097           ;call DELAY_0.5_Sconed
+                      00098           ;bcf PORTA ,2
+                      00099           ;call DELAY_0.5_Sconed  
+                      00100           ;movf COUNTER ,1
+                      00101          ; btfss STATUS ,Z
+                      00102          ; goto one_1  
+002F   01A7           00103           CLRF  BUSY
+                      00104 
+Warning[203]: Found opcode in column 1. (GOTO)
+0030   2???           00105 GOTO CHECK
+                      00106          
+                      00107 
+0031                  00108 MOOD2 ;EVERY STAGE HAS 3 SECs DELAY , WITH TOTAL DEL = 3*3 = 9 SECs
+                      00109 
+Warning[203]: Found opcode in column 1. (BTFSC)
+0031   1827           00110 BTFSC BUSY ,0
+Warning[203]: Found opcode in column 1. (GOTO)
+0032   2???           00111 GOTO BLINKING
+MPASM  5.51                      UNTITLED.ASM   12-24-2019  15:13:11         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[203]: Found opcode in column 1. (MOVLW)
+0033   3004           00112 MOVLW D'4'      ;MODE2 OPERATION PRICE IS 4 POINTS
+Warning[203]: Found opcode in column 1. (MOVWF)
+0034   00A6           00113 MOVWF OP_PRC
+Warning[203]: Found opcode in column 1. (CALL)
+0035   2???           00114 CALL BAL_CHK
+Warning[203]: Found opcode in column 1. (MOVLW)
+0036   3001           00115 MOVLW 0X01
+Warning[203]: Found opcode in column 1. (MOVWF)
+0037   00A7           00116 MOVWF BUSY
+                      00117 
+0038                  00118 MOOD2_STAGE1 
+0038   3003           00119           movlw 3
+0039   00A2           00120           movwf COUNTER
+003A   03A2           00121 one_2     decf COUNTER,1
+003B   1405           00122           bsf PORTA ,0
+003C   2???           00123           call DELAY_0.5_Sconed
+003D   1005           00124           bcf PORTA ,0
+003E   2???           00125           call DELAY_0.5_Sconed  
+003F   08A2           00126           movf COUNTER ,1
+0040   1D03           00127           btfss STATUS ,Z
+0041   2???           00128           goto one_2 
+0042                  00129 MOOD2_STAGE2
+0042   3003           00130           movlw 3
+0043   00A2           00131           movwf COUNTER
+0044   03A2           00132 two_2     decf COUNTER,1
+0045   1485           00133           bsf PORTA ,1
+0046   2???           00134           call DELAY_0.5_Sconed
+0047   1085           00135           bcf PORTA ,1
+0048   2???           00136           call DELAY_0.5_Sconed  
+0049   08A2           00137           movf COUNTER ,1
+004A   1D03           00138           btfss STATUS ,Z
+004B   2???           00139           goto two_2 
+004C                  00140 MOOD2_STAGE3
+004C   3003           00141           movlw 3
+004D   00A2           00142           movwf COUNTER
+004E   03A2           00143 three_2     decf COUNTER,1
+004F   1505           00144           bsf PORTA ,2
+0050   2???           00145           call DELAY_0.5_Sconed
+0051   1105           00146           bcf PORTA ,2
+0052   2???           00147           call DELAY_0.5_Sconed  
+0053   08A2           00148           movf COUNTER ,1
+0054   1D03           00149           btfss STATUS ,Z
+0055   2???           00150           goto three_2 
+0056   01A7           00151           CLRF  BUSY
+Warning[203]: Found opcode in column 1. (GOTO)
+0057   2???           00152 GOTO CHECK
+                      00153          
+                      00154 
+0058                  00155 MOOD3 ;EVERY STAGE HAS 2 SECs DELAY , WITH TOTAL DEL = 3*2 = 6 SECs
+                      00156 
+                      00157 
+Warning[203]: Found opcode in column 1. (BTFSC)
+MPASM  5.51                      UNTITLED.ASM   12-24-2019  15:13:11         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0058   1827           00158 BTFSC BUSY ,0
+Warning[203]: Found opcode in column 1. (GOTO)
+0059   2???           00159 GOTO BLINKING
+Warning[203]: Found opcode in column 1. (MOVLW)
+005A   3003           00160 MOVLW D'3'    ;MODE3 OPERATION PRICE IS 3 POINTS
+Warning[203]: Found opcode in column 1. (MOVWF)
+005B   00A6           00161 MOVWF OP_PRC
+Warning[203]: Found opcode in column 1. (CALL)
+005C   2???           00162 CALL BAL_CHK
+Warning[203]: Found opcode in column 1. (MOVLW)
+005D   3001           00163 MOVLW 0X01
+Warning[203]: Found opcode in column 1. (MOVWF)
+005E   00A7           00164 MOVWF BUSY
+005F                  00165 MOOD3_STAGE1
+005F   3002           00166           movlw 2
+0060   00A2           00167           movwf COUNTER
+0061   03A2           00168 one_3     decf COUNTER,1
+0062   1405           00169           bsf PORTA ,0
+0063   2???           00170           call DELAY_0.5_Sconed
+0064   1005           00171           bcf PORTA ,0
+0065   2???           00172           call DELAY_0.5_Sconed  
+0066   08A2           00173           movf COUNTER ,1
+0067   1D03           00174           btfss STATUS ,Z
+0068   2???           00175           goto one_3
+0069                  00176 MOOD3_STAGE2
+0069   3002           00177           movlw 2
+006A   00A2           00178           movwf COUNTER
+006B   03A2           00179 two_3   decf COUNTER,1
+006C   1485           00180           bsf PORTA ,1
+006D   2???           00181           call DELAY_0.5_Sconed
+006E   1085           00182           bcf PORTA ,1
+006F   2???           00183           call DELAY_0.5_Sconed  
+0070   08A2           00184           movf COUNTER ,1
+0071   1D03           00185           btfss STATUS ,Z
+0072   2???           00186           goto two_3 
+0073                  00187 MOOD3_STAGE3
+0073   3002           00188           movlw 2
+0074   00A2           00189           movwf COUNTER
+0075   03A2           00190 three_3     decf COUNTER,1
+0076   1505           00191           bsf PORTA ,2
+0077   2???           00192           call DELAY_0.5_Sconed
+0078   1105           00193           bcf PORTA ,2
+0079   2???           00194           call DELAY_0.5_Sconed  
+007A   08A2           00195           movf COUNTER ,1
+007B   1D03           00196           btfss STATUS ,Z
+007C   2???           00197           goto three_3
+007D   01A7           00198           CLRF  BUSY
+Warning[203]: Found opcode in column 1. (GOTO)
+007E   2???           00199 GOTO CHECK
+                      00200          
+                      00201 
+                      00202 
+007F                  00203 MOOD4 ;EVERY STAGE HAS 1 SEC DELAY , WITH TOTAL DEL = 3*1 = 3 SECs
+MPASM  5.51                      UNTITLED.ASM   12-24-2019  15:13:11         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[203]: Found opcode in column 1. (BTFSC)
+007F   1827           00204 BTFSC BUSY ,0
+Warning[203]: Found opcode in column 1. (GOTO)
+0080   2???           00205 GOTO BLINKING
+Warning[203]: Found opcode in column 1. (MOVLW)
+0081   3002           00206 MOVLW D'2'         ;MODE4 OPERATION PRICE IS 2 POINTS
+Warning[203]: Found opcode in column 1. (MOVWF)
+0082   00A6           00207 MOVWF OP_PRC
+Warning[203]: Found opcode in column 1. (CALL)
+0083   2???           00208 CALL BAL_CHK
+Warning[203]: Found opcode in column 1. (MOVLW)
+0084   3001           00209 MOVLW 0X01
+Warning[203]: Found opcode in column 1. (MOVWF)
+0085   00A7           00210 MOVWF BUSY
+                      00211 
+0086                  00212 MOOD4_STAGE1
+0086   3001           00213           movlw 1
+0087   00A2           00214           movwf COUNTER
+0088   03A2           00215 one_4    decf COUNTER,1
+0089   1405           00216           bsf PORTA ,0
+008A   2???           00217           call DELAY_0.5_Sconed
+008B   1005           00218           bcf PORTA ,0
+008C   2???           00219           call DELAY_0.5_Sconed  
+008D   08A2           00220           movf COUNTER ,1
+008E   1D03           00221           btfss STATUS ,Z
+008F   2???           00222           goto one_4 
+0090                  00223 MOOD4_STAGE2
+0090   3001           00224           movlw 1
+0091   00A2           00225           movwf COUNTER
+0092   03A2           00226 two_4      decf COUNTER,1
+0093   1485           00227           bsf PORTA ,1
+0094   2???           00228           call DELAY_0.5_Sconed
+0095   1085           00229           bcf PORTA ,1
+0096   2???           00230           call DELAY_0.5_Sconed  
+0097   08A2           00231           movf COUNTER ,1
+0098   1D03           00232           btfss STATUS ,Z
+0099   2???           00233           goto two_4 
+009A                  00234 MOOD4_STAGE3
+009A   3001           00235           movlw 1
+009B   00A2           00236           movwf COUNTER
+009C   03A2           00237 three_4      decf COUNTER,1
+009D   1505           00238           bsf PORTA ,2
+009E   2???           00239           call DELAY_0.5_Sconed
+009F   1105           00240           bcf PORTA ,2
+00A0   2???           00241           call DELAY_0.5_Sconed  
+00A1   08A2           00242           movf COUNTER ,1
+00A2   1D03           00243           btfss STATUS ,Z
+00A3   2???           00244           goto three_4 
+00A4   01A7           00245           CLRF  BUSY
+Warning[203]: Found opcode in column 1. (GOTO)
+00A5   2???           00246 GOTO CHECK
+                      00247          
+                      00248 
+MPASM  5.51                      UNTITLED.ASM   12-24-2019  15:13:11         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00249 
+00A6                  00250 ADD_BALANCE
+Warning[203]: Found opcode in column 1. (BTFSC)
+00A6   1827           00251 BTFSC BUSY ,0
+Warning[203]: Found opcode in column 1. (GOTO)
+00A7   2???           00252 GOTO BLINKING
+Warning[203]: Found opcode in column 1. (MOVLW)
+00A8   300A           00253 MOVLW 0X0A
+Warning[203]: Found opcode in column 1. (ADDWF)
+00A9   07A5           00254 ADDWF BALANCE,1
+                      00255 
+Warning[203]: Found opcode in column 1. (GOTO)
+00AA   2???           00256 GOTO CHECK
+                      00257 
+00AB                  00258 SHOW_BALANCE
+Warning[203]: Found opcode in column 1. (MOVLW)
+00AB   300F           00259 MOVLW 0X0F
+Warning[203]: Found opcode in column 1. (SUBWF)
+00AC   0225           00260 SUBWF BALANCE,0
+Warning[203]: Found opcode in column 1. (BTFSS)
+00AD   1C03           00261 BTFSS STATUS,C 
+Warning[203]: Found opcode in column 1. (GOTO)
+00AE   2???           00262 GOTO LABEL1
+Warning[203]: Found opcode in column 1. (BSF)
+00AF   1585           00263 BSF PORTA,3 ;IF MORE THAN 15 POINTS, BLINK '1111'
+Warning[203]: Found opcode in column 1. (BSF)
+00B0   1605           00264 BSF PORTA,4
+Warning[203]: Found opcode in column 1. (BSF)
+00B1   1706           00265 BSF PORTB,6
+Warning[203]: Found opcode in column 1. (BSF)
+00B2   1786           00266 BSF PORTB,7
+Warning[203]: Found opcode in column 1. (CALL)
+00B3   2???           00267 CALL DELAY_0.5_Sconed
+Warning[203]: Found opcode in column 1. (CALL)
+00B4   2???           00268 CALL DELAY_0.5_Sconed
+Warning[203]: Found opcode in column 1. (CALL)
+00B5   2???           00269 CALL DELAY_0.5_Sconed
+Warning[203]: Found opcode in column 1. (CALL)
+00B6   2???           00270 CALL DELAY_0.5_Sconed
+Warning[203]: Found opcode in column 1. (BCF)
+00B7   1185           00271 BCF PORTA,3
+Warning[203]: Found opcode in column 1. (BCF)
+00B8   1205           00272 BCF PORTA,4
+Warning[203]: Found opcode in column 1. (BCF)
+00B9   1306           00273 BCF PORTB,6
+Warning[203]: Found opcode in column 1. (BCF)
+00BA   1386           00274 BCF PORTB,7
+Warning[203]: Found opcode in column 1. (GOTO)
+00BB   2???           00275 GOTO CHECK
+00BC                  00276 LABEL1
+Warning[203]: Found opcode in column 1. (BTFSC)
+00BC   1825           00277 BTFSC BALANCE,0
+Warning[203]: Found opcode in column 1. (BSF)
+MPASM  5.51                      UNTITLED.ASM   12-24-2019  15:13:11         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00BD   1585           00278 BSF PORTA,3
+Warning[203]: Found opcode in column 1. (BTFSC)
+00BE   18A5           00279 BTFSC BALANCE,1
+Warning[203]: Found opcode in column 1. (BSF)
+00BF   1605           00280 BSF PORTA,4
+Warning[203]: Found opcode in column 1. (BTFSC)
+00C0   1925           00281 BTFSC BALANCE,2
+Warning[203]: Found opcode in column 1. (BSF)
+00C1   1706           00282 BSF PORTB,6
+Warning[203]: Found opcode in column 1. (BTFSC)
+00C2   19A5           00283 BTFSC BALANCE,3
+Warning[203]: Found opcode in column 1. (BSF)
+00C3   1786           00284 BSF PORTB,7
+Warning[203]: Found opcode in column 1. (CALL)
+00C4   2???           00285 CALL DELAY_0.5_Sconed
+Warning[203]: Found opcode in column 1. (CALL)
+00C5   2???           00286 CALL DELAY_0.5_Sconed
+Warning[203]: Found opcode in column 1. (CALL)
+00C6   2???           00287 CALL DELAY_0.5_Sconed
+Warning[203]: Found opcode in column 1. (CALL)
+00C7   2???           00288 CALL DELAY_0.5_Sconed
+Warning[203]: Found opcode in column 1. (CLRF)
+00C8   0185           00289 CLRF PORTA
+Warning[203]: Found opcode in column 1. (CLRF)
+00C9   0186           00290 CLRF PORTB
+                      00291 
+Warning[203]: Found opcode in column 1. (GOTO)
+00CA   2???           00292 GOTO CHECK
+                      00293 
+00CB                  00294 BAL_CHK
+Warning[203]: Found opcode in column 1. (MOVF)
+00CB   0826           00295 MOVF OP_PRC,0
+Warning[203]: Found opcode in column 1. (SUBWF)
+00CC   0225           00296 SUBWF BALANCE,0
+Warning[203]: Found opcode in column 1. (BTFSS)
+00CD   1C03           00297 BTFSS STATUS,C
+Warning[203]: Found opcode in column 1. (GOTO)
+00CE   2???           00298 GOTO  BLINKING
+Warning[203]: Found opcode in column 1. (MOVWF)
+00CF   00A5           00299 MOVWF BALANCE
+                      00300 
+Warning[203]: Found opcode in column 1. (RETURN)
+00D0   0008           00301 RETURN
+                      00302 
+00D1                  00303 BLINKING 
+                      00304  
+Warning[203]: Found opcode in column 1. (BSF)
+00D1   1585           00305 BSF PORTA,3
+Warning[203]: Found opcode in column 1. (BSF)
+00D2   1605           00306 BSF PORTA,4
+Warning[203]: Found opcode in column 1. (BSF)
+00D3   1706           00307 BSF PORTB,6
+Warning[203]: Found opcode in column 1. (BSF)
+MPASM  5.51                      UNTITLED.ASM   12-24-2019  15:13:11         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00D4   1786           00308 BSF PORTB,7
+Warning[203]: Found opcode in column 1. (CALL)
+00D5   2???           00309 CALL DELAY_BLINKING
+Warning[203]: Found opcode in column 1. (BCF)
+00D6   1185           00310 BCF PORTA,3
+Warning[203]: Found opcode in column 1. (BCF)
+00D7   1205           00311 BCF PORTA,4
+Warning[203]: Found opcode in column 1. (BCF)
+00D8   1306           00312 BCF PORTB,6
+Warning[203]: Found opcode in column 1. (BCF)
+00D9   1386           00313 BCF PORTB,7
+Warning[203]: Found opcode in column 1. (CALL)
+00DA   2???           00314 CALL DELAY_BLINKING
+Warning[203]: Found opcode in column 1. (BSF)
+00DB   1585           00315 BSF PORTA,3
+Warning[203]: Found opcode in column 1. (BSF)
+00DC   1605           00316 BSF PORTA,4
+Warning[203]: Found opcode in column 1. (BSF)
+00DD   1706           00317 BSF PORTB,6
+Warning[203]: Found opcode in column 1. (BSF)
+00DE   1786           00318 BSF PORTB,7
+Warning[203]: Found opcode in column 1. (CALL)
+00DF   2???           00319 CALL DELAY_BLINKING
+Warning[203]: Found opcode in column 1. (CLRF)
+00E0   0185           00320 CLRF PORTA
+Warning[203]: Found opcode in column 1. (CLRF)
+00E1   0186           00321 CLRF PORTB
+                      00322 
+                      00323 
+Warning[203]: Found opcode in column 1. (GOTO)
+00E2   2???           00324 GOTO CHECK
+                      00325 
+00E3                  00326 DELAY_0.5_Sconed
+Warning[203]: Found opcode in column 1. (movlw)
+00E3   3000           00327 movlw 0
+Warning[203]: Found opcode in column 1. (movwf)
+00E4   00A3           00328 movwf COUNTER1
+Warning[203]: Found opcode in column 1. (movlw)
+00E5   30F4           00329 movlw D'244'
+Warning[203]: Found opcode in column 1. (movwf)
+00E6   00A4           00330 movwf COUNTER2 
+00E7                  00331 loop 
+Warning[203]: Found opcode in column 1. (nop)
+00E7   0000           00332 nop 
+Warning[203]: Found opcode in column 1. (nop)
+00E8   0000           00333 nop
+Warning[203]: Found opcode in column 1. (nop)
+00E9   0000           00334 nop
+Warning[203]: Found opcode in column 1. (nop)
+00EA   0000           00335 nop
+Warning[203]: Found opcode in column 1. (nop)
+00EB   0000           00336 nop
+Warning[203]: Found opcode in column 1. (decfsz)
+MPASM  5.51                      UNTITLED.ASM   12-24-2019  15:13:11         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00EC   0BA3           00337 decfsz COUNTER1,1
+Warning[203]: Found opcode in column 1. (goto)
+00ED   2???           00338 goto loop
+Warning[203]: Found opcode in column 1. (decfsz)
+00EE   0BA4           00339 decfsz COUNTER2 ,1
+Warning[203]: Found opcode in column 1. (goto)
+00EF   2???           00340 goto loop 
+                      00341 
+Warning[203]: Found opcode in column 1. (return)
+00F0   0008           00342 return
+                      00343 
+00F1                  00344 DELAY_BLINKING
+                      00345 
+Warning[203]: Found opcode in column 1. (movlw)
+00F1   30F4           00346 movlw D'244'
+Warning[203]: Found opcode in column 1. (movwf)
+00F2   00A4           00347 movwf COUNTER2 
+00F3                  00348 AGAIN 
+Warning[203]: Found opcode in column 1. (nop)
+00F3   0000           00349 nop 
+Warning[203]: Found opcode in column 1. (nop)
+00F4   0000           00350 nop
+Warning[203]: Found opcode in column 1. (nop)
+00F5   0000           00351 nop
+Warning[203]: Found opcode in column 1. (nop)
+00F6   0000           00352 nop
+Warning[203]: Found opcode in column 1. (nop)
+00F7   0000           00353 nop
+Warning[203]: Found opcode in column 1. (decfsz)
+00F8   0BA4           00354 decfsz COUNTER2 ,1
+Warning[203]: Found opcode in column 1. (goto)
+00F9   2???           00355 goto AGAIN
+                      00356 
+Warning[203]: Found opcode in column 1. (return)
+00FA   0008           00357 return
+                      00358 
+                      00359 
+                      00360 
+                      00361 
+Warning[205]: Found directive in column 1. (END)
+                      00362 END
+MPASM  5.51                      UNTITLED.ASM   12-24-2019  15:13:11         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ADD_BALANCE                       000000A6
+AGAIN                             000000F3
+BALANCE                           00000025
+BAL_CHK                           000000CB
+BLINKING                          000000D1
+BUSY                              00000027
+C                                 00000000
+CHECK                             0000000D
+COUNTER                           00000022
+COUNTER1                          00000023
+COUNTER2                          00000024
+DC                                00000001
+DELAY_0.5_Sconed                  000000E3
+DELAY_BLINKING                    000000F1
+EEADR                             00000009
+EECON1                            00000088
+EECON2                            00000089
+EEDATA                            00000008
+EEIE                              00000006
+EEIF                              00000004
+F                                 00000001
+FSR                               00000004
+GIE                               00000007
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+LABEL1                            000000BC
+MAIN                              00000001
+MOOD1                             0000001A
+MOOD1_STAGE1                      00000021
+MOOD2                             00000031
+MOOD2_STAGE1                      00000038
+MOOD2_STAGE2                      00000042
+MOOD2_STAGE3                      0000004C
+MOOD3                             00000058
+MOOD3_STAGE1                      0000005F
+MOOD3_STAGE2                      00000069
+MOOD3_STAGE3                      00000073
+MOOD4                             0000007F
+MOOD4_STAGE1                      00000086
+MOOD4_STAGE2                      00000090
+MOOD4_STAGE3                      0000009A
+NOT_PD                            00000003
+NOT_RBPU                          00000007
+NOT_TO                            00000004
+OPTION_REG                        00000081
+OP_PRC                            00000026
+PCL                               00000002
+PCLATH                            0000000A
+PORTA                             00000005
+MPASM  5.51                      UNTITLED.ASM   12-24-2019  15:13:11         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PORTB                             00000006
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+SHOW_BALANCE                      000000AB
+STATUS                            00000003
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+W                                 00000000
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_CONFIG                           00002007
+MPASM  5.51                      UNTITLED.ASM   12-24-2019  15:13:11         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_CP_OFF                           00003FFF
+_CP_ON                            0000000F
+_DEVID1                           00002006
+_FOSC_EXTRC                       00003FFF
+_FOSC_HS                          00003FFE
+_FOSC_LP                          00003FFC
+_FOSC_XT                          00003FFD
+_HS_OSC                           00003FFE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_LP_OSC                           00003FFC
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDTE_OFF                         00003FFB
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FFD
+__16F84A                          00000001
+__DEBUG                           1
+loop                              000000E7
+one_1                             00000023
+one_2                             0000003A
+one_3                             00000061
+one_4                             00000088
+three_2                           0000004E
+three_3                           00000075
+three_4                           0000009C
+two_2                             00000044
+two_3                             0000006B
+two_4                             00000092
+
+Errors   :     0
+Warnings :   145 reported,     0 suppressed
+Messages :     2 reported,     0 suppressed
+
+
